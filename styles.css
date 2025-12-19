@@ -1,0 +1,220 @@
+/* 1. ПЕРЕМЕННЫЕ (Удобно менять цвета во всем проекте сразу) */
+:root {
+    --bg-dark: #0b0f0c;           /* Глубокий темный фон */
+    --bg-card: rgba(255, 255, 255, 0.03); /* Прозрачные карточки */
+    --accent-white: #ffffff;      /* Чистый белый для акцентов */
+    --text-gray: #e8e7e7;         /* Светло-серый текст */
+    --border: rgba(255, 255, 255, 0.1); /* Тонкие рамки */
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 2. ГЛОБАЛЬНЫЕ СТИЛИ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth; /* Плавный скролл до разделов */
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-gray);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* 3. ШАПКА (HERO СЕКЦИЯ) */
+.hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: linear-gradient(to bottom, rgba(11, 15, 12, 0.5), var(--bg-dark)),
+                url('images/hero-bg.jpg') center/cover no-repeat; /* Замени на свое фото */
+}
+
+.main-nav {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    padding: 30px 0;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+}
+
+.main-nav a {
+    color: var(--text-gray);
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 13px;
+    letter-spacing: 2px;
+    font-weight: 700;
+    transition: var(--transition);
+}
+
+.main-nav a:hover {
+    color: var(--accent-white);
+    transform: translateY(-2px);
+}
+
+.hero-content h1 {
+    font-size: clamp(3rem, 10vw, 6rem); /* Адаптивный размер */
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 10px;
+    margin-bottom: 10px;
+}
+
+.hero-content h2 {
+    font-size: 1.5rem;
+    font-weight: 400;
+    letter-spacing: 5px;
+    margin-bottom: 30px;
+    opacity: 0.8;
+}
+
+/* 4. КНОПКИ */
+.btn-primary, .btn {
+    display: inline-block;
+    padding: 15px 40px;
+    border: 1px solid var(--accent-white);
+    color: var(--accent-white);
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    transition: var(--transition);
+}
+
+.btn-primary:hover, .btn:hover {
+    background-color: var(--accent-white);
+    color: var(--bg-dark);
+}
+
+/* 5. СЕКЦИИ И ЗАГОЛОВКИ */
+.section {
+    padding: 100px 0;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 60px;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    color: var(--accent-white);
+}
+
+/* 6. СЕТКА НАВЫКОВ (SKILLS) */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.skill-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    padding: 30px;
+    text-align: center;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: var(--transition);
+}
+
+.skill-card:hover {
+    border-color: var(--accent-white);
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-5px);
+}
+
+/* 7. ПОРТФОЛИО (PROJECTS) */
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 30px;
+}
+
+.project-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 4px;
+}
+
+.project-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: var(--transition);
+}
+
+.project-card h3 {
+    padding: 20px;
+    text-align: center;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    margin-top: 10px;
+}
+
+.project-card:hover img {
+    transform: scale(1.05);
+}
+
+/* 8. ФУТЕР */
+.main-footer {
+    padding: 50px 0;
+    text-align: center;
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+    letter-spacing: 1px;
+    opacity: 0.6;
+}
+
+/* 9. АДАПТИВНОСТЬ ДЛЯ МОБИЛОК */
+@media (max-width: 768px) {
+    .main-nav {
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+    .project-grid {
+        grid-template-columns: 1fr;
+    }
+}
+/* Начальное состояние элементов */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px); /* Немного опущены вниз */
+    transition: all 0.8s ease-out;
+}
+
+/* Состояние, когда элемент появился (добавится через JS) */
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
